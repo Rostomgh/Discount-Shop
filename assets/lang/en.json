@@ -1,4 +1,18 @@
 {
   "app_name": "Discount Shop",
-  "app_version": "App Version"
+  "login_title": "Activate your\nPartner account",
+  "login_subtitle": "Set a secure password\nto finish your registration.",
+  "continue_with_google": "Continue with Google",
+  "or_connect_with": "Or sign in with",
+  "partner_id": "Partner ID",
+  "verified": "VERIFIED",
+  "create_password": "Create a password",
+  "remember_me": "Remember me",
+  "forgot_password": "Forgot password?",
+  "activate_account": "Activate my account",
+  "encrypted_connection": "END-TO-END ENCRYPTED CONNECTION",
+  "confirm_number_title": "Confirm Number",
+  "code_not_received": "Didn't receive a code?",
+  "resend": "Resend",
+  "sms_code_sent": "We sent you an SMS with an activation code"
 }

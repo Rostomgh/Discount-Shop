@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/constant/theme/colors.dart';
-import '../widget/app_version_text.dart';
 import '../widget/splash_logo.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -11,25 +9,16 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // White status bar icons on the blue background.
+    // Blue status and navigation bars with white icons, like the design.
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
-      child: Scaffold(
+      value: SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: AppColors.primary,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+      child: const Scaffold(
         backgroundColor: AppColors.primary,
-        body: Stack(
-          children: [
-            const Center(child: SplashLogo()),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: SafeArea(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 12.h),
-                  child: const AppVersionText(),
-                ),
-              ),
-            ),
-          ],
-        ),
+        body: Center(child: SplashLogo()),
       ),
     );
   }

@@ -1,4 +1,18 @@
 {
   "app_name": "متجر التخفيضات",
-  "app_version": "إصدار التطبيق"
+  "login_title": "فعّل حساب\nالشريك الخاص بك",
+  "login_subtitle": "عيّن كلمة مرور آمنة\nلإكمال تسجيلك.",
+  "continue_with_google": "المتابعة باستخدام Google",
+  "or_connect_with": "أو سجّل الدخول باستخدام",
+  "partner_id": "معرّف الشريك",
+  "verified": "تم التحقق",
+  "create_password": "أنشئ كلمة مرور",
+  "remember_me": "تذكرني",
+  "forgot_password": "نسيت كلمة المرور؟",
+  "activate_account": "تفعيل حسابي",
+  "encrypted_connection": "اتصال مشفّر من طرف إلى طرف",
+  "confirm_number_title": "تأكيد الرقم",
+  "code_not_received": "لم يصلك الرمز؟",
+  "resend": "إعادة الإرسال",
+  "sms_code_sent": "أرسلنا إليك رسالة نصية تحتوي على رمز التفعيل"
 }

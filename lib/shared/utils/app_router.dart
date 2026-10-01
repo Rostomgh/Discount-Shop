@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../core/constant/routes.dart';
+import '../../features/confirm_number/screen/confirm_number_screen.dart';
 import '../../features/home/screen/home_screen.dart';
+import '../../features/login/screen/login_screen.dart';
 import '../../features/splash/screen/splash_screen.dart';
 
 class AppRouter {
@@ -10,6 +12,19 @@ class AppRouter {
       case Routes.splash:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
+          settings: settings,
+        );
+      case Routes.login:
+        return MaterialPageRoute(
+          builder: (_) => const LoginScreen(),
+          settings: settings,
+        );
+      case Routes.confirmNumber:
+        // The phone number the SMS was sent to is the route argument.
+        return MaterialPageRoute(
+          builder: (_) => ConfirmNumberScreen(
+            phoneNumber: settings.arguments as String? ?? '',
+          ),
           settings: settings,
         );
       case Routes.home:

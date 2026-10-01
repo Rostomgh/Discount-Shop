@@ -65,6 +65,7 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   freezed: ^3.2.5
   build_runner: ^2.15.1
+  flutter_native_splash: ^2.4.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -111,3 +112,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# Native launch screen (shown before Flutter starts).
+# After changing this, run: dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#0056D7"
+  android_12:
+    color: "#0056D7"
+    # Transparent, so Android 12+ doesn't show the default launcher icon.
+    image: assets/native_splash/blank.png
+  web: false

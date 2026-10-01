@@ -1,4 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
+// TODO(firebase): uncomment every "Firebase" line in this file after running
+// `flutterfire configure` (it generates lib/firebase_options.dart).
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,14 +13,15 @@ import 'shared/utils/app_router.dart';
 import 'shared/utils/dep_inj.dart';
 import 'shared/utils/dio_helper.dart';
 import 'shared/utils/localization/app_ localization.dart';
-import 'shared/utils/notification.dart';
+// import 'firebase_options.dart'; // Firebase
+// import 'shared/utils/notification.dart'; // Firebase
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DepInj.setup();
   DioHelper.init();
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await NotificationServices.initializenotification();
+  // await NotificationServices.initializenotification(); // Firebase
   runApp(const MyApp());
 }
 
@@ -35,8 +38,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    NotificationServices.getToken()
-        .then((token) => debugPrint('FCM token: $token'));
+    // Firebase
+    // NotificationServices.getToken()
+    //     .then((token) => debugPrint('FCM token: $token'));
   }
 
   @override
