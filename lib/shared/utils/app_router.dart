@@ -20,7 +20,6 @@ class AppRouter {
           settings: settings,
         );
       case Routes.confirmNumber:
-        // The phone number the SMS was sent to is the route argument.
         return MaterialPageRoute(
           builder: (_) => ConfirmNumberScreen(
             phoneNumber: settings.arguments as String? ?? '',

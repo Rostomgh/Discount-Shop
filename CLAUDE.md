@@ -98,14 +98,15 @@ adb shell am start -n com.example.discount_shop/.MainActivity --es route /login
   `flutter_native_splash:` in `pubspec.yaml`. Android 12+ uses the transparent
   `assets/native_splash/blank.png` so the default launcher icon isn't shown.
 - Then the Flutter `SplashScreen` (`features/splash`) shows the logo; it sets blue status and navigation bars.
+  After `SplashScreen.duration` (4 s) it replaces itself with `/login` (`pushReplacementNamed`).
 
 ## Status / known issues
 
 - Firebase is not configured yet, so every Firebase line in `main.dart` is commented out
   (marked `// Firebase`). Run `flutterfire configure`, then uncomment all of them together.
   Calling `NotificationServices` without `Firebase.initializeApp` crashes with `[core/no-app]`.
-- Splash, login and confirm_number screens are UI only: the splash doesn't navigate anywhere yet,
-  and no button or field is connected to a cubit (their `logic` and `model` folders are empty).
+- Splash, login and confirm_number screens are UI only: the splash always goes to login on a timer
+  (no auth check yet), and no button or field is connected to a cubit (their `logic` and `model` folders are empty).
   `OtpInput` already exposes `onCompleted(code)` and `ResendCodeRow` exposes `onResend` for the cubit.
 - `Endpoints.baseUrl` is a placeholder.
 - Pinned packages: `equatable` 2.x (required by toastification), `showcaseview` 4.x (`ShowCaseWidget` is deprecated in 5.x).
