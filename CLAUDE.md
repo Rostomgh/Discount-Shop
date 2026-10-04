@@ -12,7 +12,9 @@ lib/
 │   │   └── theme/         # AppColors, AppTheme
 │   └── extensions/
 ├── logic/                 # app-wide cubits/blocs used by many features (e.g. lang_cubit)
-├── shared/utils/          # DioHelper, PersistData, AppRouter, DepInj, NotificationServices, localization
+├── shared/
+│   ├── utils/             # DioHelper, PersistData, AppRouter, DepInj, NotificationServices, localization
+│   └── widgets/           # widgets used by several features (GradientButton, AppTextField)
 └── features/
     └── <feature>/
         ├── logic/         # cubit or bloc + its state
@@ -38,14 +40,16 @@ Do not create other folders inside a feature (no `domain`, `presentation`, `data
 | `widget/` | Components the screens are built from, one per file | `<component_name>.dart` |
 
 - Screens stay short: they put widgets together, and the UI pieces live in `widget/`.
+- A widget needed by a second feature moves to `lib/shared/widgets/`; features don't import each other's widgets.
 - Empty folders keep a `.gitkeep` so git tracks them; delete it when adding the first real file.
 
 Current features: `auth` (token refresh in `model/auth_repository.dart`), `login` (UI only, route `/login`),
 `confirm_number` (UI only, route `/confirm-number`, phone number passed as the route argument),
-`home`, `splash`, `scanner` (empty).
+`become_partner` (UI only, route `/become-partner`, partner request form), `home`, `splash`, `scanner` (empty).
 
 Flow: splash → login → confirm_number. "Activate my account" opens confirm_number directly for now;
 the login cubit should do it after the API call, passing the phone number.
+The "Become a Partner" link on the login card opens become_partner.
 
 ## Adding a new feature
 
@@ -108,6 +112,8 @@ adb shell am start -n com.example.discount_shop/.MainActivity --es route /login
 - Splash, login and confirm_number screens are UI only: the splash always goes to login on a timer
   (no auth check yet), and no button or field is connected to a cubit (their `logic` and `model` folders are empty).
   `OtpInput` already exposes `onCompleted(code)` and `ResendCodeRow` exposes `onResend` for the cubit.
+  The Confirm button appears once all 4 digits are typed; its `onPressed` and the partner form's
+  "Send my request" are empty TODOs waiting for their cubits.
 - `Endpoints.baseUrl` is a placeholder.
 - Pinned packages: `equatable` 2.x (required by toastification), `showcaseview` 4.x (`ShowCaseWidget` is deprecated in 5.x).
 - `lib/shared/utils/localization/app_ localization.dart` has a space in its file name.

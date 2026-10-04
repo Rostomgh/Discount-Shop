@@ -14,5 +14,17 @@
   "confirm_number_title": "Confirmer Numéro",
   "code_not_received": "Je n'ai pas reçu de code ?",
   "resend": "Renvoyer",
-  "sms_code_sent": "Nous vous avons envoyé un SMS avec un code d'activation"
+  "sms_code_sent": "Nous vous avons envoyé un SMS avec un code d'activation",
+  "confirm": "CONFIRMER",
+  "not_partner_yet": "Pas encore partenaire ?",
+  "become_partner": "Devenir Partenaire",
+  "company_name": "Nom de l'entreprise",
+  "business_category": "Catégorie d'activité",
+  "branch_count": "Nombre de succursales",
+  "contact_name": "Nom du contact",
+  "email_address": "Adresse Email",
+  "phone_number": "Numéro de téléphone",
+  "send_request": "ENVOYER MA DEMANDE",
+  "terms_notice": "En soumettant ce formulaire, vous acceptez nos",
+  "terms_and_conditions": "Conditions Générales"
 }

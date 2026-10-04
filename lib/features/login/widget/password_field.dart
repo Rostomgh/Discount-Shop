@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/constant/theme/colors.dart';
 import '../../../shared/utils/localization/app_ localization.dart';
-import 'login_text_field.dart';
+import '../../../shared/widgets/app_text_field.dart';
 
 class PasswordField extends StatefulWidget {
   const PasswordField({super.key, this.controller});
@@ -19,7 +19,7 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    return LoginTextField(
+    return AppTextField(
       hint: AppLocalization.translateKey(context, 'create_password'),
       controller: widget.controller,
       obscureText: _obscure,

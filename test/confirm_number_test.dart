@@ -44,6 +44,27 @@ void main() {
     );
   });
 
+  testWidgets('shows the confirm button only once the code is complete',
+      (tester) async {
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(_app(const ConfirmNumberScreen(phoneNumber: '')));
+    await tester.pumpAndSettle();
+    expect(find.text('CONFIRMER'), findsNothing);
+
+    await tester.enterText(find.byType(TextField), '250');
+    await tester.pumpAndSettle();
+    expect(find.text('CONFIRMER'), findsNothing);
+
+    await tester.enterText(find.byType(TextField), '2501');
+    await tester.pumpAndSettle();
+    expect(find.text('CONFIRMER'), findsOneWidget);
+
+    // Deleting a digit hides it again.
+    await tester.enterText(find.byType(TextField), '250');
+    await tester.pumpAndSettle();
+    expect(find.text('CONFIRMER'), findsNothing);
+  });
+
   testWidgets('typing 4 digits fills the boxes and reports the code',
       (tester) async {
     addTearDown(tester.view.reset);

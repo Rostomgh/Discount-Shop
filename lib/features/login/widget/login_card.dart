@@ -4,10 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constant/routes.dart';
 import '../../../core/constant/theme/colors.dart';
 import '../../../shared/utils/localization/app_ localization.dart';
+import '../../../shared/widgets/app_text_field.dart';
+import '../../../shared/widgets/gradient_button.dart';
+import 'become_partner_link.dart';
 import 'encrypted_note.dart';
 import 'google_button.dart';
-import 'gradient_button.dart';
-import 'login_text_field.dart';
 import 'or_divider.dart';
 import 'password_field.dart';
 import 'remember_me_row.dart';
@@ -39,7 +40,7 @@ class LoginCard extends StatelessWidget {
           SizedBox(height: 30.h),
           const OrDivider(),
           SizedBox(height: 30.h),
-          LoginTextField(
+          AppTextField(
             hint: AppLocalization.translateKey(context, 'partner_id'),
             suffix: const VerifiedChip(),
           ),
@@ -55,7 +56,9 @@ class LoginCard extends StatelessWidget {
             onPressed: () =>
                 Navigator.pushNamed(context, Routes.confirmNumber),
           ),
-          SizedBox(height: 26.h),
+          SizedBox(height: 20.h),
+          const BecomePartnerLink(),
+          SizedBox(height: 20.h),
           const EncryptedNote(),
         ],
       ),

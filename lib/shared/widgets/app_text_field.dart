@@ -1,22 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/constant/theme/colors.dart';
+import '../../core/constant/theme/colors.dart';
 
-class LoginTextField extends StatelessWidget {
-  const LoginTextField({
+class AppTextField extends StatelessWidget {
+  const AppTextField({
     super.key,
-    required this.hint,
+    this.hint,
     this.controller,
     this.obscureText = false,
     this.keyboardType,
+    this.textInputAction,
+    this.autofillHints,
+    this.inputFormatters,
+    this.textDirection,
     this.suffix,
   });
 
-  final String hint;
+  final String? hint;
   final TextEditingController? controller;
   final bool obscureText;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final Iterable<String>? autofillHints;
+  final List<TextInputFormatter>? inputFormatters;
+
+  /// Set to [TextDirection.ltr] for phone numbers so they don't get
+  /// reordered in Arabic.
+  final TextDirection? textDirection;
   final Widget? suffix;
 
   @override
@@ -27,6 +39,10 @@ class LoginTextField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      autofillHints: autofillHints,
+      inputFormatters: inputFormatters,
+      textDirection: textDirection,
       style: textStyle,
       decoration: InputDecoration(
         hintText: hint,

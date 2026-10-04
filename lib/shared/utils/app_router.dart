@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/constant/routes.dart';
+import '../../features/become_partner/screen/become_partner_screen.dart';
 import '../../features/confirm_number/screen/confirm_number_screen.dart';
 import '../../features/home/screen/home_screen.dart';
 import '../../features/login/screen/login_screen.dart';
@@ -24,6 +25,11 @@ class AppRouter {
           builder: (_) => ConfirmNumberScreen(
             phoneNumber: settings.arguments as String? ?? '',
           ),
+          settings: settings,
+        );
+      case Routes.becomePartner:
+        return MaterialPageRoute(
+          builder: (_) => const BecomePartnerScreen(),
           settings: settings,
         );
       case Routes.home:

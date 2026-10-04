@@ -14,5 +14,17 @@
   "confirm_number_title": "Confirm Number",
   "code_not_received": "Didn't receive a code?",
   "resend": "Resend",
-  "sms_code_sent": "We sent you an SMS with an activation code"
+  "sms_code_sent": "We sent you an SMS with an activation code",
+  "confirm": "CONFIRM",
+  "not_partner_yet": "Not a partner yet?",
+  "become_partner": "Become a Partner",
+  "company_name": "Company name",
+  "business_category": "Business category",
+  "branch_count": "Number of branches",
+  "contact_name": "Contact name",
+  "email_address": "Email address",
+  "phone_number": "Phone number",
+  "send_request": "SEND MY REQUEST",
+  "terms_notice": "By submitting this form, you agree to our",
+  "terms_and_conditions": "Terms and Conditions"
 }

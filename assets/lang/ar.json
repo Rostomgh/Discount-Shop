@@ -14,5 +14,17 @@
   "confirm_number_title": "تأكيد الرقم",
   "code_not_received": "لم يصلك الرمز؟",
   "resend": "إعادة الإرسال",
-  "sms_code_sent": "أرسلنا إليك رسالة نصية تحتوي على رمز التفعيل"
+  "sms_code_sent": "أرسلنا إليك رسالة نصية تحتوي على رمز التفعيل",
+  "confirm": "تأكيد",
+  "not_partner_yet": "لست شريكاً بعد؟",
+  "become_partner": "كن شريكاً",
+  "company_name": "اسم الشركة",
+  "business_category": "فئة النشاط",
+  "branch_count": "عدد الفروع",
+  "contact_name": "اسم المسؤول",
+  "email_address": "البريد الإلكتروني",
+  "phone_number": "رقم الهاتف",
+  "send_request": "إرسال طلبي",
+  "terms_notice": "بإرسال هذا النموذج، فإنك توافق على",
+  "terms_and_conditions": "الشروط العامة"
 }
