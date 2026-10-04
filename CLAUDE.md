@@ -16,7 +16,8 @@ lib/
 │   ├── utils/             # DioHelper, PersistData, AppRouter, DepInj, NotificationServices, localization,
 │   │                      # functions.dart (pickGalleryImage, showToast)
 │   └── widgets/           # widgets used by several features (GradientButton, AppTextField,
-│                          # LabeledTextField, FieldLabel, LanguageMenuButton, GridBackground)
+│                          # LabeledTextField, FieldLabel, LanguageMenuButton, GridBackground,
+│                          # FadeSlideIn, StatusMessage, Pulsing)
 └── features/
     └── <feature>/
         ├── logic/         # cubit or bloc + its state
@@ -50,7 +51,9 @@ Current features: `auth` (token refresh in `model/auth_repository.dart`), `login
 `become_partner` (UI only, route `/become-partner`, partner request form),
 `navigation` (route `/home`: the bottom nav bar and its tabs, selected tab in `NavigationCubit`),
 `home` (the first tab: the partner's discounted products, `HomeCubit`; fake data in `HomeRepository`),
-`add_product` (route `/add-product`: camera or gallery photo + product form), `splash`, `scanner` (empty).
+`add_product` (route `/add-product`: camera or gallery photo + product form),
+`history` (the second tab: transactions with search, swipe to delete + undo, delete all; `HistoryCubit`,
+fake data in `HistoryRepository`), `splash`, `scanner` (empty).
 
 Flow: splash → login → confirm_number. "Activate my account" opens confirm_number directly for now;
 the login cubit should do it after the API call, passing the phone number.
@@ -58,7 +61,8 @@ The "Become a Partner" link on the login card opens become_partner.
 
 Nav bar tabs are the `NavTab` enum (`core/constant/enums.dart`): home, history, scanner, profile.
 `NavigationScreen` keeps them in an `IndexedStack` (in `NavTab` order) so tabs keep their state.
-History, scanner and profile show `TabPlaceholder` for now; profile has the language menu.
+A tab is built the first time it's opened, so it loads its data and plays its entrance animation
+when the partner sees it. Scanner and profile show `TabPlaceholder` for now; profile has the language menu.
 Switch tabs from anywhere with `context.read<NavigationCubit>().selectTab(NavTab.x)`.
 
 Adding a product: the home "Add a product" button opens `AddProductOptions` (camera or gallery).
@@ -89,7 +93,11 @@ that belong to one screen visit.
 - Numbers, prices, percentages, phone numbers or codes inside Arabic text: wrap them in Unicode
   isolates with `'-30%'.ltrIsolated` (`core/extensions/bidi.dart`) and force `TextDirection.ltr` on
   digit fields. Don't paste raw direction characters into source files.
-- Prices: `price.asPrice` (groups thousands, already isolated) followed by `t('currency')`.
+- Prices: `price.asPrice` (groups thousands, already isolated) followed by `t('currency')`;
+  `asSignedPrice` adds "+" or "-". Short dates: `DateFormat.MMMd(locale)..useNativeDigits = false`
+  so Arabic uses the same digits as the rest of the app.
+- Entrance animations: wrap list items in `FadeSlideIn` (delay grows with the index); loading
+  placeholders in `Pulsing`; empty and error states use `StatusMessage`.
 - Colors come from `AppColors`, image paths from `AppImages`. Don't hardcode them in widgets.
 - User-visible text: `AppLocalization.translateKey(context, 'key')`, with the key in en/ar/fr json.
 - HTTP: `DioHelper` (adds the auth token and refreshes it). Local storage: `PersistData` (flutter_secure_storage).
@@ -137,6 +145,9 @@ adb shell am start -n com.example.discount_shop/.MainActivity --es route /login
   "Send my request" are empty TODOs waiting for their cubits.
 - Products are fake (`HomeRepository`), and products added in the app are lost on restart.
   The "+" button after the quick tags does nothing yet.
+- Transactions are fake (`HistoryRepository`); deleting only changes the list in memory.
+  The microphone button shows "coming soon": voice search needs a speech-to-text package
+  (and the RECORD_AUDIO permission, which the manifest currently removes).
 - Camera: `camera` package (back camera, photos only). The app manifest removes the plugin's
   RECORD_AUDIO permission; iOS usage texts are in `Info.plist`. If camera access is refused, the
   camera area says so and the gallery button still works. The Android emulator's camera shows a

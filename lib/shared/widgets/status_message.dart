@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/constant/theme/colors.dart';
+import '../../core/constant/theme/colors.dart';
 
 /// Centered icon and text for an empty list or a loading error.
-class ProductsMessage extends StatelessWidget {
-  const ProductsMessage({
+class StatusMessage extends StatelessWidget {
+  const StatusMessage({
     super.key,
     required this.icon,
     required this.title,

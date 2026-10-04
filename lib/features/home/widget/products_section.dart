@@ -7,13 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constant/theme/colors.dart';
 import '../../../core/extensions/bidi.dart';
 import '../../../shared/utils/localization/app_ localization.dart';
+import '../../../shared/widgets/fade_slide_in.dart';
+import '../../../shared/widgets/status_message.dart';
 import '../logic/home_cubit.dart';
 import '../model/product_model.dart';
 import 'category_filter.dart';
-import 'fade_slide_in.dart';
 import 'product_card.dart';
 import 'product_list_skeleton.dart';
-import 'products_message.dart';
 
 /// Slivers under the header: title, category filter and the product list
 /// (or its loading, empty and error states).
@@ -32,7 +32,7 @@ class ProductsSection extends StatelessWidget {
         sliver: const SliverToBoxAdapter(child: ProductListSkeleton()),
       ),
       HomeError() => SliverToBoxAdapter(
-        child: ProductsMessage(
+        child: StatusMessage(
           icon: Icons.cloud_off_outlined,
           title: t('load_error'),
           action: TextButton(
@@ -47,7 +47,7 @@ class ProductsSection extends StatelessWidget {
             : products.where((p) => p.category == category).toList();
         if (shown.isEmpty) {
           return SliverToBoxAdapter(
-            child: ProductsMessage(
+            child: StatusMessage(
               icon: Icons.local_offer_outlined,
               title: t('no_products'),
               subtitle: t('no_products_hint'),

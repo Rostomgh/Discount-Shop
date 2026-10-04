@@ -2,30 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/constant/theme/colors.dart';
+import '../../../shared/widgets/pulsing.dart';
 
 /// Gray pulsing cards shown while the products load.
-class ProductListSkeleton extends StatefulWidget {
+class ProductListSkeleton extends StatelessWidget {
   const ProductListSkeleton({super.key, this.count = 4});
 
   final int count;
-
-  @override
-  State<ProductListSkeleton> createState() => _ProductListSkeletonState();
-}
-
-class _ProductListSkeletonState extends State<ProductListSkeleton>
-    with SingleTickerProviderStateMixin {
-  late final _controller = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 800),
-    lowerBound: 0.4,
-  )..repeat(reverse: true);
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +21,10 @@ class _ProductListSkeletonState extends State<ProductListSkeleton>
       ),
     );
 
-    return FadeTransition(
-      opacity: _controller,
+    return Pulsing(
       child: Column(
         children: [
-          for (var i = 0; i < widget.count; i++)
+          for (var i = 0; i < count; i++)
             Container(
               margin: EdgeInsets.only(bottom: 12.h),
               padding: EdgeInsets.all(12.w),

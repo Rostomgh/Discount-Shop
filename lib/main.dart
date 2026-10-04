@@ -8,6 +8,8 @@ import 'package:showcaseview/showcaseview.dart';
 import 'package:toastification/toastification.dart';
 
 import 'core/constant/theme/theme.dart';
+import 'features/history/logic/history_cubit.dart';
+import 'features/history/model/history_repository.dart';
 import 'features/home/logic/home_cubit.dart';
 import 'features/home/model/home_repository.dart';
 import 'features/navigation/logic/navigation_cubit.dart';
@@ -58,6 +60,9 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(create: (_) => NavigationCubit()),
             BlocProvider(
               create: (_) => HomeCubit(DepInj.locator<HomeRepository>()),
+            ),
+            BlocProvider(
+              create: (_) => HistoryCubit(DepInj.locator<HistoryRepository>()),
             ),
           ],
           child: BlocBuilder<LangCubit, LangState>(

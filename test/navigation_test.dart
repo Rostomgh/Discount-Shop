@@ -1,4 +1,6 @@
 import 'package:discount_shop/core/constant/enums.dart';
+import 'package:discount_shop/features/history/logic/history_cubit.dart';
+import 'package:discount_shop/features/history/model/history_repository.dart';
 import 'package:discount_shop/features/home/logic/home_cubit.dart';
 import 'package:discount_shop/features/home/model/home_repository.dart';
 import 'package:discount_shop/features/home/screen/home_screen.dart';
@@ -19,6 +21,7 @@ Widget _app(NavigationCubit cubit) {
     providers: [
       BlocProvider(create: (_) => LangCubit()),
       BlocProvider(create: (_) => HomeCubit(HomeRepository())),
+      BlocProvider(create: (_) => HistoryCubit(HistoryRepository())),
       BlocProvider.value(value: cubit),
     ],
     child: ScreenUtilInit(
@@ -94,7 +97,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(cubit.state.tab, NavTab.history);
-    expect(find.text('Historique'), findsOneWidget);
+    expect(find.text('Historique des transactions'), findsOneWidget);
     expect(find.text('Mes promotions'), findsNothing);
 
     await tester.tap(find.byType(NavBarItem).first);

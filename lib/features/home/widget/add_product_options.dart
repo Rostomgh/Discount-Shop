@@ -4,8 +4,8 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../core/constant/theme/colors.dart';
 import '../../../shared/utils/localization/app_ localization.dart';
+import '../../../shared/widgets/fade_slide_in.dart';
 import 'add_option_tile.dart';
-import 'fade_slide_in.dart';
 
 /// Bottom sheet: take a photo or import one. Pops with the [ImageSource].
 class AddProductOptions extends StatelessWidget {
