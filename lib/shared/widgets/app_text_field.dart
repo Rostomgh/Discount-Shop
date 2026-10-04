@@ -15,6 +15,7 @@ class AppTextField extends StatelessWidget {
     this.autofillHints,
     this.inputFormatters,
     this.textDirection,
+    this.validator,
     this.suffix,
   });
 
@@ -29,14 +30,18 @@ class AppTextField extends StatelessWidget {
   /// Set to [TextDirection.ltr] for phone numbers so they don't get
   /// reordered in Arabic.
   final TextDirection? textDirection;
+
+  /// Used when the field is inside a [Form].
+  final FormFieldValidator<String>? validator;
   final Widget? suffix;
 
   @override
   Widget build(BuildContext context) {
     final textStyle = TextStyle(color: AppColors.textPrimary, fontSize: 16.sp);
 
-    return TextField(
+    return TextFormField(
       controller: controller,
+      validator: validator,
       obscureText: obscureText,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
@@ -61,6 +66,9 @@ class AppTextField extends StatelessWidget {
         suffixIconConstraints: const BoxConstraints(),
         enabledBorder: _border(AppColors.border),
         focusedBorder: _border(AppColors.primary),
+        errorBorder: _border(AppColors.error),
+        focusedErrorBorder: _border(AppColors.error),
+        errorStyle: TextStyle(color: AppColors.error, fontSize: 12.sp),
       ),
     );
   }

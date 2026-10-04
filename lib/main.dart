@@ -8,6 +8,9 @@ import 'package:showcaseview/showcaseview.dart';
 import 'package:toastification/toastification.dart';
 
 import 'core/constant/theme/theme.dart';
+import 'features/home/logic/home_cubit.dart';
+import 'features/home/model/home_repository.dart';
+import 'features/navigation/logic/navigation_cubit.dart';
 import 'logic/lang_cubit/lang_cubit.dart';
 import 'shared/utils/app_router.dart';
 import 'shared/utils/dep_inj.dart';
@@ -52,6 +55,10 @@ class _MyAppState extends State<MyApp> {
           providers: [
             // Add your feature cubits here as you build them.
             BlocProvider(create: (_) => LangCubit()..onInit()),
+            BlocProvider(create: (_) => NavigationCubit()),
+            BlocProvider(
+              create: (_) => HomeCubit(DepInj.locator<HomeRepository>()),
+            ),
           ],
           child: BlocBuilder<LangCubit, LangState>(
             builder: (context, state) {

@@ -22,6 +22,10 @@
 		<string>????</string>
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
+		<key>NSCameraUsageDescription</key>
+		<string>The camera is used to take photos of the products you add.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Your photos are used to pick a picture of the product you add.</string>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
 		<key>UILaunchStoryboardName</key>

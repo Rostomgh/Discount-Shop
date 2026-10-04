@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/constant/theme/colors.dart';
-import '../widget/login_background.dart';
+import '../../../shared/widgets/grid_background.dart';
 import '../widget/login_card.dart';
 import '../widget/login_header.dart';
 
@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                           // and fills the rest of the screen.
                           Positioned.fill(
                             top: 143.h,
-                            child: const LoginBackground(),
+                            child: const GridBackground(),
                           ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(

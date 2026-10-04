@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../logic/lang_cubit/lang_cubit.dart';
+import '../../logic/lang_cubit/lang_cubit.dart';
 
 class LanguageMenuButton extends StatelessWidget {
   const LanguageMenuButton({super.key});

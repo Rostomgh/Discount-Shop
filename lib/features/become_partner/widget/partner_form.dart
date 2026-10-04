@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../shared/utils/localization/app_ localization.dart';
-import 'partner_field.dart';
+import '../../../shared/widgets/labeled_text_field.dart';
 
 /// The fields of the partner request.
 class PartnerForm extends StatelessWidget {
@@ -18,35 +18,35 @@ class PartnerForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          PartnerField(
+          LabeledTextField(
             label: t('company_name'),
             isRequired: true,
             autofillHints: const [AutofillHints.organizationName],
           ),
           gap,
-          PartnerField(label: t('business_category'), isRequired: true),
+          LabeledTextField(label: t('business_category'), isRequired: true),
           gap,
-          PartnerField(
+          LabeledTextField(
             label: t('branch_count'),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
           gap,
-          PartnerField(
+          LabeledTextField(
             label: t('contact_name'),
             isRequired: true,
             keyboardType: TextInputType.name,
             autofillHints: const [AutofillHints.name],
           ),
           gap,
-          PartnerField(
+          LabeledTextField(
             label: t('email_address'),
             isRequired: true,
             keyboardType: TextInputType.emailAddress,
             autofillHints: const [AutofillHints.email],
           ),
           gap,
-          PartnerField(
+          LabeledTextField(
             label: t('phone_number'),
             isRequired: true,
             keyboardType: TextInputType.phone,

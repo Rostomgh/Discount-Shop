@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/constant/theme/colors.dart';
+import '../../core/constant/theme/colors.dart';
 
-/// Blue area behind the bottom of the login card, with a faint grid.
-class LoginBackground extends StatelessWidget {
-  const LoginBackground({super.key});
+/// Blue area with a faint grid (login screen, home header).
+class GridBackground extends StatelessWidget {
+  const GridBackground({super.key, this.child});
+
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +16,7 @@ class LoginBackground extends StatelessWidget {
       child: CustomPaint(
         painter: _GridPainter(spacing: 50.w),
         size: Size.infinite,
+        child: child,
       ),
     );
   }
@@ -45,5 +48,6 @@ class _GridPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_GridPainter oldDelegate) => oldDelegate.spacing != spacing;
+  bool shouldRepaint(_GridPainter oldDelegate) =>
+      oldDelegate.spacing != spacing;
 }

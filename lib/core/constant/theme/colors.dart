@@ -17,4 +17,8 @@ class AppColors {
   static const Color boxBorder = Color(0xFFDFE1E3);
   static const Color divider = Color(0xFFEEF0F3);
   static const Color chipBackground = Color(0xFFEDF3FC);
+  static const Color error = Color(0xFFE5484D);
+
+  /// Behind the camera preview, and in its place until the camera is added.
+  static const Color cameraBackground = Color(0xFF1C1C1E);
 }
