@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/constant/theme/colors.dart';
 import '../../../shared/utils/localization/app_ localization.dart';
-import 'camera_circle_button.dart';
+import '../../../shared/widgets/camera_circle_button.dart';
 
 /// Close button, "QUICK ADD" title and flash button over the camera.
 class CameraTopBar extends StatelessWidget {

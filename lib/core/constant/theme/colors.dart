@@ -18,7 +18,12 @@ class AppColors {
   static const Color divider = Color(0xFFEEF0F3);
   static const Color chipBackground = Color(0xFFEDF3FC);
   static const Color error = Color(0xFFE5484D);
+  static const Color success = Color(0xFF22C55E);
 
   /// Behind the camera preview, and in its place until the camera is added.
   static const Color cameraBackground = Color(0xFF1C1C1E);
+
+  /// Gradient of the QR scanner card, under and around the camera.
+  static const Color scannerTop = Color(0xFF0B2A5E);
+  static const Color scannerBottom = Color(0xFF020B1C);
 }

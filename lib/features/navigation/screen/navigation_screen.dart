@@ -9,6 +9,7 @@ import '../../../shared/utils/localization/app_ localization.dart';
 import '../../../shared/widgets/language_menu_button.dart';
 import '../../history/screen/history_screen.dart';
 import '../../home/screen/home_screen.dart';
+import '../../scanner/screen/scanner_screen.dart';
 import '../logic/navigation_cubit.dart';
 import '../widget/app_nav_bar.dart';
 import '../widget/tab_placeholder.dart';
@@ -26,15 +27,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
   // and play their entrance animations when the partner actually sees them.
   final _opened = <NavTab>{};
 
-  Widget _tab(NavTab tab) {
+  Widget _tab(NavTab tab, NavTab current) {
     String t(String key) => AppLocalization.translateKey(context, key);
     return switch (tab) {
       NavTab.home => const HomeScreen(),
       NavTab.history => const HistoryScreen(),
-      NavTab.scanner => TabPlaceholder(
-        title: t('nav_scanner'),
-        icon: AppImages.scan,
-      ),
+      NavTab.scanner => ScannerScreen(active: current == NavTab.scanner),
       NavTab.profile => TabPlaceholder(
         title: t('nav_profile'),
         icon: AppImages.user,
@@ -62,7 +60,9 @@ class _NavigationScreenState extends State<NavigationScreen> {
           index: current.index,
           children: [
             for (final tab in NavTab.values)
-              _opened.contains(tab) ? _tab(tab) : const SizedBox.shrink(),
+              _opened.contains(tab)
+                  ? _tab(tab, current)
+                  : const SizedBox.shrink(),
           ],
         ),
         bottomNavigationBar: const AppNavBar(),

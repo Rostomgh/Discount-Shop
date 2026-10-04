@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/constant/theme/colors.dart';
+import '../../core/constant/theme/colors.dart';
 
 /// Round see-through button over the camera (close, flash).
 class CameraCircleButton extends StatelessWidget {

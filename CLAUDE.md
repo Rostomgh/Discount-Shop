@@ -17,7 +17,7 @@ lib/
 │   │                      # functions.dart (pickGalleryImage, showToast)
 │   └── widgets/           # widgets used by several features (GradientButton, AppTextField,
 │                          # LabeledTextField, FieldLabel, LanguageMenuButton, GridBackground,
-│                          # FadeSlideIn, StatusMessage, Pulsing)
+│                          # FadeSlideIn, StatusMessage, Pulsing, CameraCircleButton, CameraMessage)
 └── features/
     └── <feature>/
         ├── logic/         # cubit or bloc + its state
@@ -53,7 +53,10 @@ Current features: `auth` (token refresh in `model/auth_repository.dart`), `login
 `home` (the first tab: the partner's discounted products, `HomeCubit`; fake data in `HomeRepository`),
 `add_product` (route `/add-product`: camera or gallery photo + product form),
 `history` (the second tab: transactions with search, swipe to delete + undo, delete all; `HistoryCubit`,
-fake data in `HistoryRepository`), `splash`, `scanner` (empty).
+fake data in `HistoryRepository`), `scanner` (the third tab: scan a member's QR card or type its
+12-digit number, `ScannerCubit`), `member_validation` (route `/member-validation`: the member of a
+scanned card and the offer to apply, `MemberValidationCubit`; fake data in `MemberValidationRepository`),
+`splash`.
 
 Flow: splash → login → confirm_number. "Activate my account" opens confirm_number directly for now;
 the login cubit should do it after the API call, passing the phone number.
@@ -62,7 +65,9 @@ The "Become a Partner" link on the login card opens become_partner.
 Nav bar tabs are the `NavTab` enum (`core/constant/enums.dart`): home, history, scanner, profile.
 `NavigationScreen` keeps them in an `IndexedStack` (in `NavTab` order) so tabs keep their state.
 A tab is built the first time it's opened, so it loads its data and plays its entrance animation
-when the partner sees it. Scanner and profile show `TabPlaceholder` for now; profile has the language menu.
+when the partner sees it. Profile shows `TabPlaceholder` for now, with the language menu.
+`ScannerScreen` gets `active` (its tab is selected): the camera only runs while the tab is shown and
+the app is in the foreground, since `IndexedStack` keeps the tab alive.
 Switch tabs from anywhere with `context.read<NavigationCubit>().selectTab(NavTab.x)`.
 
 Adding a product: the home "Add a product" button opens `AddProductOptions` (camera or gallery).
@@ -148,6 +153,13 @@ adb shell am start -n com.example.discount_shop/.MainActivity --es route /login
 - Transactions are fake (`HistoryRepository`); deleting only changes the list in memory.
   The microphone button shows "coming soon": voice search needs a speech-to-text package
   (and the RECORD_AUDIO permission, which the manifest currently removes).
+- Scanner: `mobile_scanner` (QR codes only). A scanned or typed card turns the frame green, pauses
+  the camera, then opens `/member-validation` with `(code: code, scanned: bool)` as the argument
+  (`scanned` is false for manual entry). That screen pops with true when "Validate access" is
+  tapped; the scanner then shows a toast (TODO: send the card and offer to the API) and scans again.
+  `ScannerCubit` ignores codes while a card is shown. Every code returns the same fake member, and
+  "No offer" (`MemberValidationCubit.noOffer`) is always added after the member's offers. Widget tests that show `ScannerView` can't use `pumpAndSettle` (no plugin, so the camera
+  spinner never stops); pump in steps instead, as in `scanner_test.dart`.
 - Camera: `camera` package (back camera, photos only). The app manifest removes the plugin's
   RECORD_AUDIO permission; iOS usage texts are in `Info.plist`. If camera access is refused, the
   camera area says so and the gallery button still works. The Android emulator's camera shows a

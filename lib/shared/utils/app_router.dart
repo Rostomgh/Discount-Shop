@@ -8,8 +8,12 @@ import '../../features/become_partner/screen/become_partner_screen.dart';
 import '../../features/confirm_number/screen/confirm_number_screen.dart';
 import '../../features/home/model/product_model.dart';
 import '../../features/login/screen/login_screen.dart';
+import '../../features/member_validation/logic/member_validation_cubit.dart';
+import '../../features/member_validation/model/member_validation_repository.dart';
+import '../../features/member_validation/screen/member_validation_screen.dart';
 import '../../features/navigation/screen/navigation_screen.dart';
 import '../../features/splash/screen/splash_screen.dart';
+import 'dep_inj.dart';
 
 class AppRouter {
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -51,6 +55,21 @@ class AppRouter {
             create: (_) =>
                 AddProductCubit(imagePath: settings.arguments as String?),
             child: const AddProductScreen(),
+          ),
+          settings: settings,
+        );
+      case Routes.memberValidation:
+        // The argument is the card number and whether its QR code was
+        // scanned (false when it was typed). Pops with true once validated.
+        final (:code, :scanned) =
+            settings.arguments as ({String code, bool scanned});
+        return MaterialPageRoute<bool>(
+          builder: (_) => BlocProvider(
+            create: (_) => MemberValidationCubit(
+              DepInj.locator<MemberValidationRepository>(),
+              code: code,
+            )..load(),
+            child: MemberValidationScreen(scanned: scanned),
           ),
           settings: settings,
         );

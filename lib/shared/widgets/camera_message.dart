@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/constant/theme/colors.dart';
+import '../../core/constant/theme/colors.dart';
 
 /// Shown in place of the camera when it can't be used.
 class CameraMessage extends StatelessWidget {
