@@ -20,6 +20,10 @@ class AppColors {
   static const Color error = Color(0xFFE5484D);
   static const Color success = Color(0xFF22C55E);
 
+  /// Gradient of the "Log out" button.
+  static const Color dangerLight = Color(0xFFD62B2B);
+  static const Color danger = Color(0xFFB80F0F);
+
   /// Behind the camera preview, and in its place until the camera is added.
   static const Color cameraBackground = Color(0xFF1C1C1E);
 

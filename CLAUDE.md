@@ -17,7 +17,8 @@ lib/
 │   │                      # functions.dart (pickGalleryImage, showToast)
 │   └── widgets/           # widgets used by several features (GradientButton, AppTextField,
 │                          # LabeledTextField, FieldLabel, LanguageMenuButton, GridBackground,
-│                          # FadeSlideIn, StatusMessage, Pulsing, CameraCircleButton, CameraMessage)
+│                          # FadeSlideIn, StatusMessage, Pulsing, CameraCircleButton, CameraMessage,
+│                          # DiscountSelector, PageHeader, ConfirmDialog)
 └── features/
     └── <feature>/
         ├── logic/         # cubit or bloc + its state
@@ -54,21 +55,32 @@ Current features: `auth` (token refresh in `model/auth_repository.dart`), `login
 `add_product` (route `/add-product`: camera or gallery photo + product form),
 `history` (the second tab: transactions with search, swipe to delete + undo, delete all; `HistoryCubit`,
 fake data in `HistoryRepository`), `scanner` (the third tab: scan a member's QR card or type its
-12-digit number, `ScannerCubit`), `member_validation` (route `/member-validation`: the member of a
+12-digit number, `ScannerCubit`), `profile` (the fourth tab: the store, settings and log out,
+`ProfileCubit`; fake data in `ProfileRepository`; routes `/store-information` and `/change-branch`),
+`discounts` (routes `/add-discount` and `/manage-discounts`: the discounts the partner gives to members,
+`DiscountsCubit`; fake data in `DiscountsRepository`), `member_validation` (route `/member-validation`: the member of a
 scanned card and the offer to apply, `MemberValidationCubit`; fake data in `MemberValidationRepository`),
 `splash`.
 
-Flow: splash → login → confirm_number. "Activate my account" opens confirm_number directly for now;
-the login cubit should do it after the API call, passing the phone number.
+Flow: splash → login → confirm_number → home. For now "Activate my account" skips confirm_number and
+opens `/home` directly (`pushNamedAndRemoveUntil`, so back doesn't return to login); the login cubit
+should open confirm_number after the API call, passing the phone number.
 The "Become a Partner" link on the login card opens become_partner.
 
 Nav bar tabs are the `NavTab` enum (`core/constant/enums.dart`): home, history, scanner, profile.
 `NavigationScreen` keeps them in an `IndexedStack` (in `NavTab` order) so tabs keep their state.
 A tab is built the first time it's opened, so it loads its data and plays its entrance animation
-when the partner sees it. Profile shows `TabPlaceholder` for now, with the language menu.
+when the partner sees it.
 `ScannerScreen` gets `active` (its tab is selected): the camera only runs while the tab is shown and
 the app is in the foreground, since `IndexedStack` keeps the tab alive.
 Switch tabs from anywhere with `context.read<NavigationCubit>().selectTab(NavTab.x)`.
+
+Profile tab: the store header, Account (store information, change branch), Discounts (add, manage),
+App settings (language switch for en/fr/ar, appearance) and log out. `ProfileCubit` and `DiscountsCubit`
+are app-wide (in `main.dart`) so the pages they open share their data with the tab; the store pages
+open only once the store is loaded. Log out asks first, opens `/login`, then resets `ProfileCubit`,
+`DiscountsCubit` and the selected tab (home and history data are not reset).
+The app version under the button comes from `package_info_plus` (the version in `pubspec.yaml`).
 
 Adding a product: the home "Add a product" button opens `AddProductOptions` (camera or gallery).
 Gallery picks the photo first and passes its path as the `/add-product` route argument; camera opens
@@ -164,6 +176,11 @@ adb shell am start -n com.example.discount_shop/.MainActivity --es route /login
   RECORD_AUDIO permission; iOS usage texts are in `Info.plist`. If camera access is refused, the
   camera area says so and the gallery button still works. The Android emulator's camera shows a
   virtual room.
+- Store details, branch and discounts are fake and only kept in memory (`ProfileRepository`,
+  `DiscountsRepository`); log out doesn't clear any token yet. Appearance only shows "Light":
+  dark mode isn't built, tapping it shows "coming soon".
+- Widget tests that show the profile must call `PackageInfo.setMockInitialValues` and
+  `FlutterSecureStorage.setMockInitialValues` (see `profile_test.dart`).
 - `Endpoints.baseUrl` is a placeholder.
 - Pinned packages: `equatable` 2.x (required by toastification), `showcaseview` 4.x (`ShowCaseWidget` is deprecated in 5.x).
 - `lib/shared/utils/localization/app_ localization.dart` has a space in its file name.

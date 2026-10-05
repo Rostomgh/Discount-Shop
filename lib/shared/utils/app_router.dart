@@ -6,12 +6,16 @@ import '../../features/add_product/logic/add_product_cubit.dart';
 import '../../features/add_product/screen/add_product_screen.dart';
 import '../../features/become_partner/screen/become_partner_screen.dart';
 import '../../features/confirm_number/screen/confirm_number_screen.dart';
+import '../../features/discounts/screen/add_discount_screen.dart';
+import '../../features/discounts/screen/manage_discounts_screen.dart';
 import '../../features/home/model/product_model.dart';
 import '../../features/login/screen/login_screen.dart';
 import '../../features/member_validation/logic/member_validation_cubit.dart';
 import '../../features/member_validation/model/member_validation_repository.dart';
 import '../../features/member_validation/screen/member_validation_screen.dart';
 import '../../features/navigation/screen/navigation_screen.dart';
+import '../../features/profile/screen/change_branch_screen.dart';
+import '../../features/profile/screen/store_information_screen.dart';
 import '../../features/splash/screen/splash_screen.dart';
 import 'dep_inj.dart';
 
@@ -71,6 +75,28 @@ class AppRouter {
             )..load(),
             child: MemberValidationScreen(scanned: scanned),
           ),
+          settings: settings,
+        );
+      // The store and discount pages use the app-wide ProfileCubit and
+      // DiscountsCubit, so their changes show on the profile tab.
+      case Routes.storeInformation:
+        return MaterialPageRoute(
+          builder: (_) => const StoreInformationScreen(),
+          settings: settings,
+        );
+      case Routes.changeBranch:
+        return MaterialPageRoute(
+          builder: (_) => const ChangeBranchScreen(),
+          settings: settings,
+        );
+      case Routes.addDiscount:
+        return MaterialPageRoute(
+          builder: (_) => const AddDiscountScreen(),
+          settings: settings,
+        );
+      case Routes.manageDiscounts:
+        return MaterialPageRoute(
+          builder: (_) => const ManageDiscountsScreen(),
           settings: settings,
         );
       default:

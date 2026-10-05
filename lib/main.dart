@@ -1,6 +1,3 @@
-// TODO(firebase): uncomment every "Firebase" line in this file after running
-// `flutterfire configure` (it generates lib/firebase_options.dart).
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,11 +5,15 @@ import 'package:showcaseview/showcaseview.dart';
 import 'package:toastification/toastification.dart';
 
 import 'core/constant/theme/theme.dart';
+import 'features/discounts/logic/discounts_cubit.dart';
+import 'features/discounts/model/discounts_repository.dart';
 import 'features/history/logic/history_cubit.dart';
 import 'features/history/model/history_repository.dart';
 import 'features/home/logic/home_cubit.dart';
 import 'features/home/model/home_repository.dart';
 import 'features/navigation/logic/navigation_cubit.dart';
+import 'features/profile/logic/profile_cubit.dart';
+import 'features/profile/model/profile_repository.dart';
 import 'features/scanner/logic/scanner_cubit.dart';
 import 'logic/lang_cubit/lang_cubit.dart';
 import 'shared/utils/app_router.dart';
@@ -66,6 +67,13 @@ class _MyAppState extends State<MyApp> {
               create: (_) => HistoryCubit(DepInj.locator<HistoryRepository>()),
             ),
             BlocProvider(create: (_) => ScannerCubit()),
+            BlocProvider(
+              create: (_) => ProfileCubit(DepInj.locator<ProfileRepository>()),
+            ),
+            BlocProvider(
+              create: (_) =>
+                  DiscountsCubit(DepInj.locator<DiscountsRepository>()),
+            ),
           ],
           child: BlocBuilder<LangCubit, LangState>(
             builder: (context, state) {

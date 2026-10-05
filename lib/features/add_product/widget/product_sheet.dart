@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/constant/theme/colors.dart';
 import '../../../shared/utils/localization/app_ localization.dart';
+import '../../../shared/widgets/discount_selector.dart';
 import '../../../shared/widgets/field_label.dart';
 import '../../../shared/widgets/labeled_text_field.dart';
 import '../logic/add_product_cubit.dart';
-import 'discount_selector.dart';
 import 'quick_tags.dart';
 
 /// White panel under the camera with the product fields. Put it inside a

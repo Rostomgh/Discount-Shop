@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/constant/theme/colors.dart';
-import '../../../core/extensions/bidi.dart';
+import '../../core/constant/theme/colors.dart';
+import '../../core/extensions/bidi.dart';
 
 /// Row of "-10%", "-20%"... choices; the selected one is filled blue.
 class DiscountSelector extends StatelessWidget {
